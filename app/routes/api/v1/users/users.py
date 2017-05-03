@@ -100,6 +100,9 @@ class Users(Resource):
         password = request.form.get('password', None)
 
         form = usersValidate.RegistrationForm(request.form)
+        
+        # add youngtip
+        new_userId = ''
 
         if form.validate():
             try:
@@ -110,6 +113,10 @@ class Users(Resource):
                 )
                 db.session.add(user)
                 db.session.commit()
+
+                # add youngtip
+                new_userId = user.id
+                
             except IntegrityError as e:
                 field, value = get_exists_error(e)
 
@@ -123,7 +130,9 @@ class Users(Resource):
 
                 return _return, status.HTTP_400_BAD_REQUEST
 
-            return None, status.HTTP_201_CREATED
+            # modify youngtip
+            # return None, status.HTTP_201_CREATED
+            return {'id':new_userId}, status.HTTP_201_CREATED
 
         for field, errors in form.errors.items():
             for error in errors:
