@@ -114,9 +114,9 @@ class Users(Resource):
                 db.session.add(user)
                 db.session.commit()
 
-                # add youngtip
+                # add youngtip - check push
                 new_userId = user.id
-                
+
             except IntegrityError as e:
                 field, value = get_exists_error(e)
 
