@@ -12,6 +12,7 @@ class UserModel(db.Model):
     email = Column(String(255), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
     permission = Column(String(255), nullable=False, default='USER')
+    confirmed = db.Column(db.Boolean, default=False)
     updated_at = Column(DateTime)
     created_at = Column(DateTime, default=datetime.datetime.now)
 

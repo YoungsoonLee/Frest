@@ -101,10 +101,9 @@ class Users(Resource):
 
         form = usersValidate.RegistrationForm(request.form)
         
-        # add youngtip
-        new_userId = ''
-
         if form.validate():
+            # add youngtip
+            new_userId = ''
             try:
                 user = UserModel(
                     username=username,

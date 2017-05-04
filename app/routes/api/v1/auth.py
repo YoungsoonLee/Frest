@@ -30,6 +30,8 @@ class Auth(Resource):
         password = request.form.get('password', None)
 
         if verify_password(email, password):
+            # add youngtip
+            # check confirmed
             _return = {
                 'data': token_generate(email=email)
             }

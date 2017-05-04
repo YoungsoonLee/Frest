@@ -39,13 +39,16 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
 
     data = {
         'user_id': user.id,
+        'username': user.username,
         'created_at': created_at.isoformat(),
         'expired_at': expired_at.isoformat(),
         'scheme': TOKEN_SCHEME
     }
 
-    token = Serializer(APP_SECRET_KEY, expires_in=expires_in).dumps(data)
-    data['token'] = hashlib.sha384(token).hexdigest()
+    # change bytes to string
+    # token = Serializer(APP_SECRET_KEY, expires_in=expires_in).dumps(data)
+    token = Serializer(APP_SECRET_KEY, expires_in=expires_in).dumps(data).decode()
+    data['token'] = hashlib.sha384(token.encode()).hexdigest()
 
     user_token = UserTokenModel(
         user_id=user.id,
@@ -64,11 +67,12 @@ def token_load(hashed=''):
     user_token = UserTokenModel.query \
         .filter(UserTokenModel.hashed == hashed)\
         .first()
-
+    # print('youngtip >> ' + str(hashed))
+    # print('youngtip >> ' + str(user_token.token))
     data = Serializer(APP_SECRET_KEY).loads(user_token.token)
     data['expired_at'] = user_token.expired_at.isoformat()
     data['permission'] = get_user(data['user_id']).permission
-
+    #  print('youngtip >> ' + str(data))
     return data
 
 

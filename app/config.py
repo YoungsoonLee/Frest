@@ -8,7 +8,7 @@
 ENVIRONMENT = 'development'
 
 # DEFAULT URL
-DEFAULT_URL = 'http://0.0.0.0:5000'
+DEFAULT_URL = 'http://0.0.0.0:3000'
 
 # LOGGER FORMATTING
 LOGGER_FORMAT = '[%(levelname)s][%(filename)s:%(lineno)s] %(message)s'
@@ -19,7 +19,7 @@ LOGGER_FORMAT = '[%(levelname)s][%(filename)s:%(lineno)s] %(message)s'
 # -----------------------------
 
 # APP DEFAULT PORT (default : 3000)
-APP_DEFAULT_PORT = 5000
+APP_DEFAULT_PORT = 3000
 
 # APP SECRET KEY
 APP_SECRET_KEY = 'APP_SECRET_KEY'
@@ -55,11 +55,21 @@ APP_VERSION = '1.0.0'
 # DATABASE URL & SETTING
 DATABASE = {
     'engine': 'postgres',
+    'host': 'horton.elephantsql.com',
+    'port': '5432',
+    'user': 'xqzzzhuc', # postgres
+    'password': 'ZNkvucT-Wb_5wW2OPIuBDwNWujvY2sTJ', # yt5100?
+    'database': 'xqzzzhuc'
+}
+"""
+DATABASE = {
+    'engine': 'postgres',
     'host': 'localhost',
     'port': '5432',
     'user': '',
     'password': '',
     'database': ''
 }
+"""
 
 DATABASE_URI = '%(engine)s://%(user)s:%(password)s@%(host)s:%(port)s/%(database)s' % DATABASE
