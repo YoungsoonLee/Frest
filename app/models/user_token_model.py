@@ -34,6 +34,8 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
         .filter(UserModel.email == email) \
         .first()
 
+    print(user)
+
     created_at = datetime.datetime.now()
     expired_at = created_at + datetime.timedelta(seconds=expires_in)
 
@@ -42,7 +44,8 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
         'username': user.username,
         'created_at': created_at.isoformat(),
         'expired_at': expired_at.isoformat(),
-        'scheme': TOKEN_SCHEME
+        'scheme': TOKEN_SCHEME,
+        'confirmed': user.confirmed
     }
 
     # change bytes to string

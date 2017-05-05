@@ -16,12 +16,13 @@ class UserModel(db.Model):
     updated_at = Column(DateTime)
     created_at = Column(DateTime, default=datetime.datetime.now)
 
-    def __init__(self, username=None, email=None, password=None, permission=None, updated_at=None):
+    def __init__(self, username=None, email=None, password=None, permission=None, updated_at=None, confirmed=None):
         self.username = username
         self.email = email
         self.password = password
         self.permission = permission
         self.updated_at = updated_at
+        self.confirmed = confirmed
 
 
 def get_user(user_id=0):
@@ -43,3 +44,14 @@ def get_users(order='desc', page=0, limit=10):
         users.append(user)
 
     return users
+
+def email_confirmed(id=None):
+    user = get_user(id)
+    
+    if user is not None:
+        user.confirmed = True
+        db.session.commit()
+        return True
+    else:
+        return False
+    
