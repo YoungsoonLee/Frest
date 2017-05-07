@@ -3,3 +3,10 @@
 migrations
 .idea/*
 .venv/*
+*.pyc
+env
+venv
+.env
+env*
+.idea
+config.py
