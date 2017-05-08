@@ -13,16 +13,20 @@ class UserModel(db.Model):
     password = Column(String(255), nullable=False)
     permission = Column(String(255), nullable=False, default='USER')
     confirmed = db.Column(db.Boolean, default=False)
-    updated_at = Column(DateTime)
+    is_active = db.Column(db.Boolean, default=True)  # active or close
+    is_anonymous = db.Column(db.Boolean, default=False) # guest or not (for future) 
     created_at = Column(DateTime, default=datetime.datetime.now)
+    updated_at = Column(DateTime)
+    closed_at = Column(DateTime)
 
-    def __init__(self, username=None, email=None, password=None, permission=None, updated_at=None, confirmed=None):
+    def __init__(self, username=None, email=None, password=None, permission=None, confirmed=None, is_active=None, is_anonymous=None):
         self.username = username
         self.email = email
         self.password = password
         self.permission = permission
-        self.updated_at = updated_at
         self.confirmed = confirmed
+        self.is_active = is_active
+        self.is_anonymous = is_anonymous   
 
 
 def get_user(user_id=0):

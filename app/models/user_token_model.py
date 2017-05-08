@@ -34,7 +34,7 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
         .filter(UserModel.email == email) \
         .first()
 
-    print(user)
+    # print(user)
 
     created_at = datetime.datetime.now()
     expired_at = created_at + datetime.timedelta(seconds=expires_in)
@@ -45,7 +45,8 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
         'created_at': created_at.isoformat(),
         'expired_at': expired_at.isoformat(),
         'scheme': TOKEN_SCHEME,
-        'confirmed': user.confirmed
+        'confirmed': user.confirmed,
+        'is_active': user.is_active,
     }
 
     # change bytes to string
@@ -75,7 +76,8 @@ def token_load(hashed=''):
     data = Serializer(APP_SECRET_KEY).loads(user_token.token)
     data['expired_at'] = user_token.expired_at.isoformat()
     data['permission'] = get_user(data['user_id']).permission
-    #  print('youngtip >> ' + str(data))
+    data['token'] = user_token.hashed # hashed token
+    # print('youngtip token_load >> ' + str(data))
     return data
 
 

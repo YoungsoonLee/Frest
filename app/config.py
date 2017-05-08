@@ -6,6 +6,7 @@ import sys
 # -----------------------------
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+# print(basedir)
 
 if os.path.exists('config.env'):
     print('Importing environment from .env file')
@@ -29,8 +30,8 @@ LOGGER_FORMAT = '[%(levelname)s][%(filename)s:%(lineno)s] %(message)s'
 #  APP CONFIG
 # -----------------------------
 
-# APP DEFAULT PORT (default : 3000)
-APP_DEFAULT_PORT = 5000
+# APP DEFAULT PORT (default : 5000)
+APP_DEFAULT_PORT = 3000
 
 # APP SECRET KEY
 # APP_SECRET_KEY = 'APP_SECRET_KEY'
@@ -67,6 +68,8 @@ APP_VERSION = '1.0.0'
 # -----------------------------
 #  DATABASE CONFIG
 # -----------------------------
+
+
 
 # DATABASE URL & SETTING
 DATABASE = {

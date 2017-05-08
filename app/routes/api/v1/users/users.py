@@ -100,7 +100,6 @@ class Users(Resource):
         password = request.form.get('password', None)
 
         form = usersValidate.RegistrationForm(request.form)
-        
         if form.validate():
             # add youngtip
             new_userId = ''
@@ -110,6 +109,7 @@ class Users(Resource):
                     password=generate_password_hash(password),
                     email=email
                 )
+
                 db.session.add(user)
                 db.session.commit()
 

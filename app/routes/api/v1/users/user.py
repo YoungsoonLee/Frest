@@ -49,7 +49,6 @@ class User(Resource):
 
             if token_is_auth(request.headers['Authorization'], user_id):
                 user = get_user(user_id)
-
                 return serialize_user(user), status.HTTP_200_OK
             else:
                 return "You don't have permission.", status.HTTP_401_UNAUTHORIZED

@@ -33,3 +33,14 @@ class Index(Resource):
         }
 
         return _return, status.HTTP_200_OK
+
+    def post(self):
+        _return = {
+            'environment': ENVIRONMENT,
+            'version': {
+                'api': API_VERSION,
+                'app': APP_VERSION
+            }
+        }
+
+        return _return, status.HTTP_200_OK
