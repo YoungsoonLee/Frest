@@ -7,6 +7,10 @@ from app.models.user_token_model import token_generate
 from app.modules import frest
 from app.modules.auth.login import verify_password
 
+# add youngtip
+from json import loads, dumps
+
+
 _URL = '/auth'
 
 
@@ -26,8 +30,11 @@ class Auth(Resource):
 
     @frest.API
     def post(self):
-        email = request.form.get('email', None)
-        password = request.form.get('password', None)
+        # email = request.form.get('email', None)
+        # password = request.form.get('password', None)
+        r_data = loads(request.data)
+        email = r_data['email']
+        password = r_data['password']
 
         if verify_password(email, password):
             # add youngtip
@@ -41,3 +48,4 @@ class Auth(Resource):
                 'message': 'User does not exist or the password does not match.'
             }
             return _return, status.HTTP_400_BAD_REQUEST
+

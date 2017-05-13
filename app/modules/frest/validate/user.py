@@ -16,8 +16,10 @@ class modificationForm(Form):
         validators.Optional(),
         validators.Length(min=5)
     ])
+    """
     permission = StringField('Permission', [
         validators.Optional(),
         validators.AnyOf(message='You can only choose from ADMIN, USER', values=['ADMIN', 'USER'])
     ])
+    """
 

@@ -43,7 +43,7 @@ else:
 
 # TOKEN
 TOKEN_SCHEME = "bearer"
-TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 30 * 6
+TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 30 * 6 # 6 month, TODO: change to 6 hours
 
 
 # -----------------------------

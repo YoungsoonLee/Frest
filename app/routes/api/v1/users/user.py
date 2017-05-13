@@ -16,6 +16,8 @@ from app.modules.frest.api.error import get_exists_error
 from app.modules.frest.validate import user as userValidate
 from app.modules.frest.serialize.user import serialize_user
 
+from app.modules.auth.login import verify_password
+
 _URL = '/users/<prefix>'
 
 
@@ -89,10 +91,10 @@ class User(Resource):
                 .filter(UserModel.id == user_id)
 
             if token_is_auth(request.headers['Authorization'], user_id):
-                user_permission = token_load_with_auth(request.headers['Authorization'])['permission']
+                # user_permission = token_load_with_auth(request.headers['Authorization'])['permission']
 
-                if user_permission != 'ADMIN' and request.form.get('permission') is not None:
-                    return "You don't have permission.", status.HTTP_401_UNAUTHORIZED
+                # if user_permission != 'ADMIN' and request.form.get('permission') is not None:
+                #    return "You don't have permission.", status.HTTP_401_UNAUTHORIZED
 
                 form = userValidate.modificationForm(request.form)
 
@@ -102,15 +104,44 @@ class User(Resource):
 
                         try:
                             for key, value in request.form.items():
-                                if value is not None and value != '':
-                                    if key == 'password':
-                                        value = generate_password_hash(value)
-                                        token_expire_all(user.id)
+                                if key == 'change_email':
+                                    '''check emaoil'''
+                                    check_user_query = UserModel.query.filter(UserModel.email == value).first()
+                                    if check_user_query is not None:
+                                        _return = {
+                                            'message': "'" + value + "' is already exists.",
+                                            'field': {
+                                                'label': 'New email',
+                                                'name': 'change_email'
+                                            }
+                                        }
 
-                                    setattr(user, key, value)
+                                        return _return, status.HTTP_400_BAD_REQUEST
+                                    '''check password'''
+                                    if verify_password(user.email, request.form['password']) is False:
+                                        _return = {
+                                            'message': "Password is wrong",
+                                            'field': {
+                                                'label': 'password',
+                                                'name': 'password'
+                                            }
+                                        }
+
+                                        return _return, status.HTTP_400_BAD_REQUEST
+
+                                    setattr(user, 'email', value)
+                                    setattr(user, 'confirmed', False)
+                                else: 
+                                    if value is not None and value != '':
+                                        if key == 'password':
+                                            value = generate_password_hash(value)
+                                            token_expire_all(user.id)
+
+                                        setattr(user, key, value)
 
                             user.updated_at = datetime.datetime.now()
                             db.session.commit()
+
                         except IntegrityError as e:
                             field, value = get_exists_error(e)
 

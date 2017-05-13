@@ -100,6 +100,7 @@ class Users(Resource):
         password = request.form.get('password', None)
 
         form = usersValidate.RegistrationForm(request.form)
+        
         if form.validate():
             # add youngtip
             new_userId = ''

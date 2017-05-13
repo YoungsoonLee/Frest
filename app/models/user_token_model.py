@@ -42,6 +42,7 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
     data = {
         'user_id': user.id,
         'username': user.username,
+        'email': user.email,
         'created_at': created_at.isoformat(),
         'expired_at': expired_at.isoformat(),
         'scheme': TOKEN_SCHEME,
