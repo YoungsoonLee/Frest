@@ -58,4 +58,10 @@ def email_confirmed(id=None):
         return True
     else:
         return False
+
+def verify_email(email):
+    user_query = UserModel.query \
+        .filter(UserModel.email == email).first()
+    return user_query
     
+

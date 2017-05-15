@@ -26,3 +26,13 @@ def verify_password(email, password):
         db.session.commit()
 
     return accepted
+
+# return user
+def verify_email(email):
+    user_query = UserModel.query \
+                .filter(UserModel.email == email)
+    if user_query.count():
+        return user_query.first()
+    else:
+        return None
+

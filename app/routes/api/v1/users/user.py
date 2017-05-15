@@ -18,6 +18,10 @@ from app.modules.frest.serialize.user import serialize_user
 
 from app.modules.auth.login import verify_password
 
+# add youngtip
+from json import loads, dumps
+from app.utils import simplemultidict as simple_dict
+
 _URL = '/users/<prefix>'
 
 
@@ -97,6 +101,7 @@ class User(Resource):
                 #    return "You don't have permission.", status.HTTP_401_UNAUTHORIZED
 
                 form = userValidate.modificationForm(request.form)
+                # print(form)
 
                 if form.validate():
                     if user_query.count():
@@ -110,21 +115,15 @@ class User(Resource):
                                     if check_user_query is not None:
                                         _return = {
                                             'message': "'" + value + "' is already exists.",
-                                            'field': {
-                                                'label': 'New email',
-                                                'name': 'change_email'
-                                            }
+                                            'field': 'New email'
                                         }
 
                                         return _return, status.HTTP_400_BAD_REQUEST
                                     '''check password'''
-                                    if verify_password(user.email, request.form['password']) is False:
+                                    if verify_password(user.email, request.form.get('changeEmailPassword')) is False:
                                         _return = {
                                             'message': "Password is wrong",
-                                            'field': {
-                                                'label': 'password',
-                                                'name': 'password'
-                                            }
+                                            'field': 'Password'
                                         }
 
                                         return _return, status.HTTP_400_BAD_REQUEST
@@ -160,6 +159,7 @@ class User(Resource):
                         return "The user does not exist.", status.HTTP_404_NOT_FOUND
 
                 for field, errors in form.errors.items():
+                    print(form, field)
                     for error in errors:
                         _return = {
                             'message': error,

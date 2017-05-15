@@ -17,6 +17,10 @@ from app.modules.frest.validate import users as usersValidate
 from app.modules.frest.serialize.user import serialize_user
 from app.utils import paging
 
+# add youngtip
+from json import loads, dumps
+from app.utils import simplemultidict as simple_dict
+
 _URL = '/users'
 
 
@@ -100,7 +104,7 @@ class Users(Resource):
         password = request.form.get('password', None)
 
         form = usersValidate.RegistrationForm(request.form)
-        
+
         if form.validate():
             # add youngtip
             new_userId = ''

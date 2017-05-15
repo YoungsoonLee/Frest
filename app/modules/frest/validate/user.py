@@ -16,6 +16,18 @@ class modificationForm(Form):
         validators.Optional(),
         validators.Length(min=5)
     ])
+
+    change_email = StringField('change_email', [
+        validators.Optional(),
+        validators.Length(min=5),
+        validators.Email()
+    ])
+
+    changeEmailPassword = PasswordField('changeEmailPassword', [
+        validators.Optional(),
+        validators.Length(min=5)
+    ])
+
     """
     permission = StringField('Permission', [
         validators.Optional(),

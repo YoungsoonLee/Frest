@@ -40,7 +40,8 @@ def token_generate(email=None, expires_in=TOKEN_EXPIRE_TIME):
     expired_at = created_at + datetime.timedelta(seconds=expires_in)
 
     data = {
-        'user_id': user.id,
+        'id': user.id,
+        # 'user_id': user.id,
         'username': user.username,
         'email': user.email,
         'created_at': created_at.isoformat(),
