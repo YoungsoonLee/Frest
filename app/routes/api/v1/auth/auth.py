@@ -54,8 +54,8 @@ class Auth(Resource):
 
     @apiParam {String} email Users' email.
 
-    @apiSuccess (200) {String} data Generated JWT token.
-    @apiError (400) AuthFail User does not exist or the password does not match
+    @apiSuccess (200) 
+    @apiError (400) 
     """
     @frest.API
     def put(self):

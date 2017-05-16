@@ -6,6 +6,8 @@ from flask_restful import Resource
 from app.modules import frest
 from app import db
 from app.models.user_model import UserModel, email_confirmed
+from app.modules.frest.serialize.user import serialize_user
+from app.models.user_token_model import token_generate
 
 _URL = '/confirm'
 
@@ -27,10 +29,15 @@ class Confirm(Resource):
     @frest.API
     def post(self):
         token = request.form.get('token', None)
-        id = request.form.get('id', None)
+        id = request.form.get('id', None) # !!!
 
-        if email_confirmed(id):
-            return None, status.HTTP_200_OK
+        user = email_confirmed(id)
+
+        if user is not None:
+            _return = {
+                'data': token_generate(email=user.email)
+            }
+            return _return, status.HTTP_200_OK
         else:
             return None, status.HTTP_400_BAD_REQUEST
 

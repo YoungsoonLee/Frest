@@ -55,9 +55,10 @@ def email_confirmed(id=None):
     if user is not None:
         user.confirmed = True
         db.session.commit()
-        return True
+        # return True
+        return user
     else:
-        return False
+        return None
 
 def verify_email(email):
     user_query = UserModel.query \
