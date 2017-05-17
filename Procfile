@@ -1,1 +1,1 @@
-worker: python3 -u app.py runserver
+worker: python3 app.py runserver
