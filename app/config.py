@@ -20,7 +20,7 @@ if os.path.exists('config.env'):
 ENVIRONMENT = 'development'
 
 # DEFAULT URL
-DEFAULT_URL = 'http://0.0.0.0:3000'
+DEFAULT_URL = 'http://0.0.0.0'
 
 # LOGGER FORMATTING
 LOGGER_FORMAT = '[%(levelname)s][%(filename)s:%(lineno)s] %(message)s'
