@@ -1,4 +1,4 @@
-#!/Users/leeyoungsoon/my_task/my_bolierplate/REST/Frest/venv/bin/python
+#!/Users/leeyoungsoon/my_task/my_bolierplate/REST/Frest/venv_frest/bin/python
 
 import sys
 import getopt

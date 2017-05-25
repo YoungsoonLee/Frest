@@ -21,6 +21,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 
-
 # TOKEN AUTH AUTHENTICATION
 token_auth = HTTPTokenAuth(scheme=TOKEN_SCHEME)
+
+# make routes..for gunicorn
+from app import routes

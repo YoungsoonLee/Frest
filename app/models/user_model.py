@@ -11,7 +11,7 @@ class UserModel(db.Model):
     username = Column(String(255), unique=True, nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
-    permission = Column(String(255), nullable=False, default='USER')
+    permission = Column(String(255), nullable=False, default='USER') # baned user or user
     confirmed = db.Column(db.Boolean, default=False)
     is_active = db.Column(db.Boolean, default=True)  # active or close
     is_anonymous = db.Column(db.Boolean, default=False) # guest or not (for future) 

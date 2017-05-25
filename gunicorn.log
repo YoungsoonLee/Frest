@@ -1,0 +1,7 @@
+[2017-05-19 13:34:52 -0700] [8480] [INFO] Starting gunicorn 19.7.1
+[2017-05-19 13:34:52 -0700] [8480] [INFO] Listening at: http://127.0.0.1:3000 (8480)
+[2017-05-19 13:34:52 -0700] [8480] [INFO] Using worker: sync
+[2017-05-19 13:34:52 -0700] [8483] [INFO] Booting worker with pid: 8483
+[2017-05-19 13:36:02 -0700] [8483] [INFO] Worker exiting (pid: 8483)
+[2017-05-19 13:36:02 -0700] [8480] [INFO] Handling signal: term
+[2017-05-19 13:36:02 -0700] [8480] [INFO] Shutting down: Master

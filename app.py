@@ -13,7 +13,9 @@ import os
 from flask_script import Server, Manager
 from flask_migrate import Migrate, MigrateCommand
 
-from app import app, db, routes, handler
+#from app import app, db, routes, handler
+from app import app, db, handler
+
 from app.config import APP_DEFAULT_PORT, APP_SECRET_KEY, ENVIRONMENT
 from app.modules.auth import login, token
 
