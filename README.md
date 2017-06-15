@@ -1,6 +1,10 @@
 This is the forked project from https://raw.githubusercontent.com/h4wldev/frest
+This is backend boilerplate
 
+start 
+	honcho start -f local (use gunicorn)
 
+=====
 Frest
 =====
 <img src="https://raw.githubusercontent.com/h4wldev/frest/master/frest.png" height="150">
